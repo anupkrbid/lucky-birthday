@@ -8,14 +8,18 @@ checkNoBtn.addEventListener("click", () => {
   const dobValue = dob.value;
 
   if (luckyNoValue && dobValue) {
-    const updatedDob = [...dobValue.replaceAll("-", "")].reduce(
-      (acc, cur) => acc + Number(cur),
-      0
-    );
-    if (updatedDob === luckyNoValue) {
-      message.textContent = luckyNoValue + " is a lucky number!! 🥳";
+    if (luckyNoValue <= 0) {
+      message.textContent = "Please enter a positive lucky number 😑";
     } else {
-      message.textContent = luckyNoValue + " is not that lucky 😕";
+      const updatedDob = [...dobValue.replaceAll("-", "")].reduce(
+        (acc, cur) => acc + Number(cur),
+        0
+      );
+      if (updatedDob % luckyNoValue === 0) {
+        message.textContent = luckyNoValue + " is a lucky number!! 🥳";
+      } else {
+        message.textContent = luckyNoValue + " is not that lucky 😕";
+      }
     }
   } else {
     message.textContent = "Please enter both the fields 😑";
